@@ -867,11 +867,10 @@ void ProcessImageArea(const unsigned char* rgba, size_t x0, size_t y0,
         if (nb_chans == 4) {
           int16_t a = get_pixel(x, y, 3);
           group_data[3][y & 1][x + kPadding] = a;
-          group_data[1][y & 1][x + kPadding] = a ? r - b : 0;
+          group_data[1][y & 1][x + kPadding] = r - b;
           int16_t tmp = b + (group_data[1][y & 1][x + kPadding] >> 1);
-          group_data[2][y & 1][x + kPadding] = a ? g - tmp : 0;
-          group_data[0][y & 1][x + kPadding] =
-              a ? tmp + (group_data[2][y & 1][x + kPadding] >> 1) : 0;
+          group_data[2][y & 1][x + kPadding] = g - tmp;
+          group_data[0][y & 1][x + kPadding] =tmp + (group_data[2][y & 1][x + kPadding] >> 1);
         } else {
           group_data[1][y & 1][x + kPadding] = r - b;
           int16_t tmp = b + (group_data[1][y & 1][x + kPadding] >> 1);
